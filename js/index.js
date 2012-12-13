@@ -13,7 +13,7 @@ deviceready: function() {
     var pushNotification = window.plugins.pushNotification;
     pushNotification.onDeviceReady();
  
-    pushNotification.registerDevice({alert:true, badge:true, sound:true, pw_appid:"PUSHWOOSH_APP_ID", appname:"APP_NAME"},
+    pushNotification.registerDevice({alert:true, badge:true, sound:true, pw_appid:"572D8-611BE", appname:"test"},
         function(status) {
             var deviceToken = status['deviceToken'];
             console.warn('registerDevice: ' + deviceToken);
