@@ -8,25 +8,9 @@
         <link href="css/index.css" rel="stylesheet" />
     </head>
     <body>
-        <div class="app">
-            <h2>Push Notifications Tester</h2>
-            <div id="btns">
-                <ul id="btnList">
-                    <li><button onclick="app.register()">Register for Notifications</button></li>
-                    <li><button onclick="app.receiveStatus()">Remote Notification Status</button></li>
-                    <li><button onclick="app.getPending()">Get Pending Notifications</button></li>
-                    <li>
-                        <textarea id="log" readonly></textarea>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
     <script src="phonegap.js"></script>
     <script src="js/plugins/PushNotification.js"></script>
     <script src="js/index.js"></script>
-    <script type="text/javascript">
-        console.log("Test " + app);
-        app.initialize();
-    </script>
     </body>
 </html>
