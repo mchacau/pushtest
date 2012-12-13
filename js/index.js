@@ -1,6 +1,6 @@
 function initPushwoosh() {
 	var pushNotification = window.plugins.pushNotification;
-	pushNotification.onDeviceReady();
+	pushNotification.deviceReady();
 	
 	pushNotification.registerDevice({alert:true, badge:true, sound:true, pw_appid:"572D8-611BE", appname:"test"},
 									function(status) {
