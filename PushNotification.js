@@ -1,10 +1,12 @@
 //
 //  PushNotification.js
 //
-// Created by Olivier Louvignes on 06/05/12.
-// Inspired by Urban Airship Inc orphaned PushNotification phonegap plugin.
+// Based on the Push Notifications Cordova Plugin by Olivier Louvignes on 06/05/12.
+// Modified by Max Konev on 18/05/12.
 //
-// Copyright 2012 Olivier Louvignes. All rights reserved.
+// Pushwoosh Push Notifications Plugin for Cordova iOS
+// www.pushwoosh.com
+//
 // MIT Licensed
 
 (function(cordova) {
@@ -12,19 +14,42 @@
 	function PushNotification() {}
 
 	// Call this to register for push notifications and retreive a deviceToken
-	PushNotification.prototype.registerDevice = function(config, callback) {
-        //console.log(">>Plugin JS - registerDevice");
-        cordova.exec(callback, callback, "PushNotification", "registerDevice", config ? [config] : []);
+	PushNotification.prototype.registerDevice = function(config, success, fail) {
+		cordova.exec(success, fail, "PushNotification", "registerDevice", config ? [config] : []);
 	};
 
-	// Call this to retreive pending notification received while the application is in background or at launch
-	PushNotification.prototype.getPendingNotifications = function(callback) {
-		cordova.exec(callback, callback, "PushNotification", "getPendingNotifications", []);
+	// Call this to set tags for the device
+	PushNotification.prototype.setTags = function(config, success, fail) {
+		cordova.exec(success, fail, "PushNotification", "setTags", config ? [config] : []);
+	};
+
+	//Android Only----
+	PushNotification.prototype.unregisterDevice = function(success, fail) {
+		cordova.exec(success, fail, "PushNotification", "unregisterDevice", []);
+	};
+	
+	PushNotification.prototype.startGeoPushes = function(success, fail) {
+		cordova.exec(success, fail, "PushNotification", "startGeoPushes", []);
+	};
+
+	PushNotification.prototype.stopGeoPushes = function(success, fail) {
+		cordova.exec(success, fail, "PushNotification", "stopGeoPushes", []);
+	};
+
+	//Android End----
+	
+	//iOS only----
+	// Call this to send geo location for the device
+	PushNotification.prototype.sendLocation = function(config, success, fail) {
+		cordova.exec(success, fail, "PushNotification", "sendLocation", config ? [config] : []);
+	};
+
+	PushNotification.prototype.onDeviceReady = function() {
+		cordova.exec(null, null, "PushNotification", "onDeviceReady", []);
 	};
 
 	// Call this to get a detailed status of remoteNotifications
 	PushNotification.prototype.getRemoteNotificationStatus = function(callback) {
-        //console.log("Calling to get remote notification status");
 		cordova.exec(callback, callback, "PushNotification", "getRemoteNotificationStatus", []);
 	};
 
@@ -37,12 +62,7 @@
 	PushNotification.prototype.cancelAllLocalNotifications = function(callback) {
 		cordova.exec(callback, callback, "PushNotification", "cancelAllLocalNotifications", []);
 	};
-
-	// Call this to retreive the original device unique id
-	// @warning As of today, usage is deprecated and requires explicit consent from the user
-	PushNotification.prototype.getDeviceUniqueIdentifier = function(callback) {
-		cordova.exec(callback, callback, "PushNotification", "getDeviceUniqueIdentifier", []);
-	};
+	//iOS End----
 
 	// Event spawned when a notification is received while the application is active
 	PushNotification.prototype.notificationCallback = function(notification) {
